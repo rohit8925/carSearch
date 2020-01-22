@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Car Search</title>
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.js"></script>
+<script type="text/javascript">
+   $(document).ready(() => {
+    $('#search1').click(() => {
+      $('#form1').submit(function() {
+        if($(this).data('valid')) {
+          return true;
+        }
+        else {
+          var boxvalue = $('input[id="search"]').val();
+          $.ajax({
+              url: 'cars/?' + boxvalue,
+              type: 'GET',
+              dataType: 'json',
+              success: (data) => {
+                if ((data == null) || (data == 0)){ 
+                  $('#results').html("No matching brands found.");  
+                }else {
+                  console.log("you received some data" + data)
+                  let text = []
+                  for (i = 0; i < data.length; i++) {
+                       text += data[i] + "<br>";
+                  }
+                  $('#results').html("Search Result :<br>" + text);
+              }
+            }
+  
+          });
+          return false;
+        }
+        $(this).data('valid', false);
+       });
+     });
+  });
+</script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+body {
+  font-family: Arial;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+ form.example input[type=text] {
+  padding: 10px;
+  font-size: 17px;
+  border: 1px solid grey;
+  float: left;
+  width: 80%;
+  background: #f1f1f1;
+}
+
+form.example button {
+  float: left;
+  width: 20%;
+  padding: 10px;
+  background: #2196F3;
+  color: white;
+  font-size: 17px;
+  border: 1px solid grey;
+  border-left: none;
+  cursor: pointer;
+}
+
+form.example button:hover {
+  background: #0b7dda;
+}
+
+/* form.example::after {
+  content: "";
+  clear: both;
+  display: table;
+} */
+</style>
+</head>
+<body>
+  <h2>Car brand name real­time search</h2>
+<form id='form1'>
+ <input type="text" id="search"  name="search2" size="50" minlength="2" required title="2 characters minimum"/>
+<button id="search1" type="submit"><i class="fa fa-search"></i></button>
+</form>
+<div id="results">
+</div> 
+</body>
+</html> 

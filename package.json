@@ -1,0 +1,16 @@
+{
+  "name": "carsearch",
+  "version": "1.0.0",
+  "description": "Car brand name real­time search",
+  "main": "server.js",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "rohit.t",
+  "license": "ISC"
+}
